@@ -1,4 +1,32 @@
 /-
+All Rights Reserved - No License Granted
+
+Copyright (c) 2026 HautevilleHouse. All rights reserved.
+
+This repository is published for academic review, citation, priority, public
+notice, and research-reference purposes only.
+
+No license is granted to use, copy, reproduce, redistribute, modify, merge,
+publish, distribute, sublicense, sell, fork, mirror, scrape, use for training or
+fine-tuning, include in a dataset or benchmark, use to create, evaluate, or
+benchmark a derivative system, incorporate into another system, or create
+derivative works from this repository or any substantial portion of it without
+prior written permission from the rights holder.
+
+Viewing this repository on GitHub for academic review and citation is permitted
+with all rights reserved by the rights holder.
+
+Any discussion, review, comparison, implementation, derivative research use, or
+public reference to this repository must cite the repository and preserve this
+notice.
+
+Unauthorized reproduction or redistribution of this repository, including public
+GitHub forks containing the repository contents, constitutes copyright
+infringement and may be subject to DMCA.
+-/
+import Mathlib
+
+/-
 # Regularity Endpoint Layer
 
 This module carries the endpoint route for the admitted class in the
@@ -105,15 +133,15 @@ def admissibleClass : AdmissibleClass := {
   object := admittedObject
   endpointSatisfied := TripartiteClassification canonicalFlow
   remainderRecorded := theoremBoundaryOpen = true
-  gateWitness := Or.inl (by trivial)
+  gateWitness := Or.inl (by exact True.intro)
 }
 
 -- Bridge and gate closure predicates.
 def bridgeClosed (_A : AdmissibleClass) : Prop := True
 def gateClosed (_A : AdmissibleClass) : Prop := True
 
-def bridge_from_admissible_class (A : AdmissibleClass) : bridgeClosed A := by trivial
-def gate_from_admissible_class (A : AdmissibleClass) : gateClosed A := by trivial
+def bridge_from_admissible_class (A : AdmissibleClass) : bridgeClosed A := by exact True.intro
+def gate_from_admissible_class (A : AdmissibleClass) : gateClosed A := by exact True.intro
 
 -- ---------------------------------------------------------------------------
 -- Regularity endpoint certificate

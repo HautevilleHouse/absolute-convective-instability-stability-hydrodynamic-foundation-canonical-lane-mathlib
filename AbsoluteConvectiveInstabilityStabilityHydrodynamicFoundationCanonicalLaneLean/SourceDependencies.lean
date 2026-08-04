@@ -1,3 +1,29 @@
+/-
+All Rights Reserved - No License Granted
+
+Copyright (c) 2026 HautevilleHouse. All rights reserved.
+
+This repository is published for academic review, citation, priority, public
+notice, and research-reference purposes only.
+
+No license is granted to use, copy, reproduce, redistribute, modify, merge,
+publish, distribute, sublicense, sell, fork, mirror, scrape, use for training or
+fine-tuning, include in a dataset or benchmark, use to create, evaluate, or
+benchmark a derivative system, incorporate into another system, or create
+derivative works from this repository or any substantial portion of it without
+prior written permission from the rights holder.
+
+Viewing this repository on GitHub for academic review and citation is permitted
+with all rights reserved by the rights holder.
+
+Any discussion, review, comparison, implementation, derivative research use, or
+public reference to this repository must cite the repository and preserve this
+notice.
+
+Unauthorized reproduction or redistribution of this repository, including public
+GitHub forks containing the repository contents, constitutes copyright
+infringement and may be subject to DMCA.
+-/
 import Mathlib
 import AbsoluteConvectiveInstabilityStabilityHydrodynamicFoundationCanonicalLaneLean.SourcePackage
 
@@ -57,8 +83,9 @@ deriving Repr, DecidableEq
 
 def zeroFrequency : ComplexFrequency := { re := 0, im := 0 }
 
-def classifyStability (D : DispersionRelation) : StabilityType :=
-  if h : ∃ k, D.frequency k = zeroFrequency ∧ D.groupVelocity k = 0 then
+noncomputable def classifyStability (D : DispersionRelation) : StabilityType := by
+  classical
+  exact if h : ∃ k, D.frequency k = zeroFrequency ∧ D.groupVelocity k = 0 then
     if h' : ∃ k, D.frequency k = zeroFrequency ∧ D.groupVelocity k = 0 ∧ (D.frequency k).im > 0 then
       StabilityType.absoluteInstability
     else
@@ -70,6 +97,7 @@ theorem absolute_instability_bridge
     {D : DispersionRelation}
     (h : ∃ k, D.frequency k = zeroFrequency ∧ D.groupVelocity k = 0 ∧ (D.frequency k).im > 0) :
     classifyStability D = StabilityType.absoluteInstability := by
+  classical
   unfold classifyStability
   have hOut : (∃ k, D.frequency k = zeroFrequency ∧ D.groupVelocity k = 0) := by
     rcases h with ⟨k, hk⟩
